@@ -246,6 +246,14 @@ class Offline {
 
         if (!event.http) return;
 
+        if(typeof event.http === 'string'){
+          var split = event.http.split(' ');
+          event.http = {
+            path: split[1],
+            method: split[0]
+          }
+        }
+
         // generate an enpoint via the endpoint class
         const endpoint = new Endpoint(event.http, funOptions).generate();
 
